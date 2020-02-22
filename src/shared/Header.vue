@@ -6,9 +6,8 @@
                     <h1>TravelList</h1>
                 </div>
                 <div class="header__right">
-                    <a href="#">Search</a>
-                    <a href="#">My List</a>
-                    <a href="#">Visited</a>
+                    <router-link to="/search">Search</router-link>
+                    <router-link to="/my-list">My List</router-link>
                 </div>
             </div>
         </div>

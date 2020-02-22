@@ -16,11 +16,19 @@
                             <p>Longitude: <span>{{ dest.longitude }}</span></p>
                             <p>Latitude: <span>{{ dest.latitude }}</span></p>
                         </div>
-                        <button @click="saveDestination(index)">Add to List</button>
+                        <button @click="saveDestination(index); addSuccess(dest.name)">Add to List</button>
                         <button>Learn More</button>
                     </div>
                 </li>
             </transition-group>
+        </div>
+        <div v-if="added" class="success-message">
+            <div class="success-message__modal">
+                <div class="modal__text">
+                    You have successfully added {{ destName }} to your list!
+                    <button @click="closeModal">Close</button>
+                </div>
+            </div>
         </div>
     </div>
 </template>
@@ -33,17 +41,24 @@
     export default {
         data() {
             return {
-                searchQuery: 'Type Destination'
+                searchQuery: 'Type Destination',
+                added: false,
+                destName: ''
             }
         },
         methods: {
             ...mapActions([
                 'locationSearch',
-                'setSearch'
-            ]),
-            ...mapMutations([
+                'setSearch',
                 'saveDestination'
             ]),
+            addSuccess(name) {
+                this.destName = name;
+                this.added = !this.added;
+            },
+            closeModal() {
+                this.added = !this.added;
+            },
             clearSearch() {
                 if (this.searchQuery == 'Type Destination') {
                     this.searchQuery = '';
@@ -184,6 +199,28 @@
                 padding: 5px 0;
             }
         }
+        }
+    }
+
+    .success-message {
+        background: rgba(0,0,0,0.5);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        height: 100vh;
+        width: 100%;
+        z-index: 999;
+        top: 0;
+
+        &__modal {
+            width: 400px;
+            height: 300px;
+            border-radius: 25px;
+            background: whitesmoke;
+            padding: 20px;
+            box-sizing: border-box;
+            text-align: center;
         }
     }
 </style>

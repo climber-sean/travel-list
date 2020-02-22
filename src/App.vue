@@ -1,7 +1,10 @@
 <template>
   <div>
     <app-header></app-header>
-    <app-search></app-search>
+    <router-view>
+      <app-search></app-search>
+      <app-my-list></app-my-list>
+    </router-view>
     
   </div>
 </template>
@@ -9,11 +12,13 @@
 <script>
 import Header from './shared/Header.vue';
 import Search from './components/Search.vue';
+import MyList from './components/MyList.vue';
 
 export default {
   components: {
     appHeader: Header,
-    appSearch: Search
+    appSearch: Search,
+    appMyList: MyList
   }
 }
 </script>

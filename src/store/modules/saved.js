@@ -3,19 +3,24 @@ const state = {
 }
 
 const getters = {
-    getDestination: ( state, getters, rootState, rootGetters ) => {
-        return rootState.search
+    savedDestinations: state => {
+        return state.savedDest;
     }
 }
 
 const mutations = {
-    saveDestination: (index) => {
-        console.log(getters.getDestination());
+    addToList: (state, data) => {
+        state.savedDest.push(data);
+        console.log(state.savedDest);
     }
 }
 
 const actions = {
-
+    saveDestination: ({commit, state, rootState, rootGetters}, index) => {
+        console.log(rootState.search.sortedInfo);
+        let data = rootState.search.sortedInfo[index];
+        commit('addToList', data);
+    }
 }
 
 export default {
