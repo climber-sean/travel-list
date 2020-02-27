@@ -2,7 +2,7 @@
     <div class="search">
         <div class="container">
             <div class="search-bar">
-                <input v-model="searchQuery" @click="clearSearch" type="text" class="search-bar__input">
+                <input v-model="searchQuery" @click="clearSearch" @keydown.enter="locationSearch(searchQuery)" type="text" class="search-bar__input">
                 <button @click="locationSearch(searchQuery)" class="search-bar__button">Search</button>
             </div>
         </div>
@@ -21,15 +21,9 @@
                     </div>
                 </li>
             </transition-group>
+            <em v-if="searchResult.length <= 0">Searching</em>
         </div>
-        <div v-if="added" class="success-message">
-            <div class="success-message__modal">
-                <div class="modal__text">
-                    You have successfully added {{ destName }} to your list!
-                    <button @click="closeModal">Close</button>
-                </div>
-            </div>
-        </div>
+        <app-success @close-modal="closeModal(data)" v-if="added" v-bind:destination="destName" class="success-message"></app-success>
     </div>
 </template>
 
@@ -37,6 +31,8 @@
     import { mapActions } from 'vuex';
     import { mapGetters } from 'vuex';
     import { mapMutations } from 'vuex';
+
+    import Success from './Success.vue';
 
     export default {
         data() {
@@ -55,9 +51,11 @@
             addSuccess(name) {
                 this.destName = name;
                 this.added = !this.added;
+                console.log(this.added);
             },
-            closeModal() {
-                this.added = !this.added;
+            closeModal(data) {
+                console.log(data);
+                this.added = data;
             },
             clearSearch() {
                 if (this.searchQuery == 'Type Destination') {
@@ -69,6 +67,9 @@
             ...mapGetters([
                 'searchResult',
             ])
+        },
+        components: {
+            AppSuccess: Success
         }
     }
 </script>
@@ -116,12 +117,14 @@
 
     @keyframes grow {
         0% {
+            opacity: 0;
             transform: scale(0);
         }
         70% {
-            transform: scale(1.1);
+            transform: scale(1.05);
         }
         100% {
+            opacity: 1;
             transform: scale(1);
         }
     }
@@ -147,6 +150,7 @@
         flex: 0 0 calc(100% / 3 - 20px);
         max-width: calc(100% / 3 - 20px);
         max-height: 500px;
+        max-width: 400px;
         border-radius: 25px;
         background: white;
         padding: 15px;
@@ -199,28 +203,6 @@
                 padding: 5px 0;
             }
         }
-        }
-    }
-
-    .success-message {
-        background: rgba(0,0,0,0.5);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        position: absolute;
-        height: 100vh;
-        width: 100%;
-        z-index: 999;
-        top: 0;
-
-        &__modal {
-            width: 400px;
-            height: 300px;
-            border-radius: 25px;
-            background: whitesmoke;
-            padding: 20px;
-            box-sizing: border-box;
-            text-align: center;
         }
     }
 </style>

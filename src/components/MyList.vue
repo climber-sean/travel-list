@@ -14,15 +14,8 @@
                             </div>
                             <button>Delete</button>
                             <button>Learn More</button>
+                            <button>Visited</button>
                         </div>
-                    </li>
-                </ul>
-            </div>
-
-            <div class="my-lists__visited">
-                <ul class="visited-list">
-                    <li class="visited-list__item">
-                        Test
                     </li>
                 </ul>
             </div>
@@ -58,6 +51,7 @@ export default {
         max-width: calc(100% / 3 - 20px);
         max-height: 500px;
         border-radius: 25px;
+        max-width: 400px;
         background: white;
         padding: 15px;
         margin: 10px;
@@ -107,6 +101,8 @@ export default {
                 cursor: pointer;
                 margin: 4px 0;
                 padding: 5px 0;
+                background: lighten(black,30%);
+                color: white;
             }
         }
     }
