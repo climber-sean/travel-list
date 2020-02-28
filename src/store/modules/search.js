@@ -19,14 +19,14 @@ const mutations = {
     // Sorts search results into just the geographical location
     // Pushed the to the sortedInfo array to hold search results
     setSearch: (state, response) => {
-        console.log(response);
         if (response !== null) {
             response.data.data.forEach(element => {
-                if (element.result_type === 'geos') {
+                if (element.result_type === 'geos' || element.result_type === 'things_to_do') {
                     state.sortedInfo.push(element.result_object);
                 }
             });
         }
+        console.log(state.sortedInfo);
     },
 }
 

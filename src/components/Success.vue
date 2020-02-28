@@ -28,7 +28,7 @@ export default {
         display: flex;
         justify-content: center;
         align-items: center;
-        position: absolute;
+        position: fixed;
         height: 100vh;
         width: 100%;
         z-index: 999;

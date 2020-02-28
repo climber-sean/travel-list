@@ -3,8 +3,9 @@
         <div class="container">
 
             <div class="my-lists__saved">
+                <h1>Saved Destinations</h1>
                 <ul class="saved-list">
-                    <li v-for="(dest, index) in savedDestinations" :key="index" class="saved-list__item">
+                    <li v-for="(dest, index) in savedDestinations" :key="dest.location_id" class="saved-list__item">
                         <img class="responsive-img" :src="dest.photo.images.small.url" />
                         <div class="item-info">
                             <h2>{{ dest.name }}</h2>
@@ -13,8 +14,8 @@
                                 <p>Latitude: <span>{{ dest.latitude }}</span></p>
                             </div>
                             <button>Delete</button>
-                            <button>Learn More</button>
                             <button>Visited</button>
+                            <button>More</button>
                         </div>
                     </li>
                 </ul>
@@ -38,17 +39,31 @@ export default {
 </script>
 
 <style lang="scss">
+
+.my-lists {
+    margin-top: 50px;
+}
+
+.my-lists__saved {
+    width: 420px;
+    text-align: center;
+    padding: 15px 0;
+    
+    h1 {
+        margin: 0;
+    }
+}
+
 .saved-list {
     list-style: none;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     margin-top: 15px;
-    padding: 0 15px;
+    padding: 15px;
 
         &__item {
-        flex: 0 0 calc(100% / 3 - 20px);
-        max-width: calc(100% / 3 - 20px);
+        flex: 1 1 calc(100% / 3 - 20px);
         max-height: 500px;
         border-radius: 25px;
         max-width: 400px;

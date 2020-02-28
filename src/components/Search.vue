@@ -8,7 +8,7 @@
         </div>
         <div class="search-container">
             <transition-group class="search-results" name="growEnter" tag="ul">
-                <li class="search-results__item" v-for="(dest, index) in searchResult" :key="index">
+                <li class="search-results__item" v-for="(dest, index) in searchResult" :key="dest.location_id">
                     <img class="responsive-img" :src="dest.photo.images.small.url" />
                     <div class="item-info">
                         <h2>{{ dest.name }}</h2>
@@ -17,13 +17,13 @@
                             <p>Latitude: <span>{{ dest.latitude }}</span></p>
                         </div>
                         <button @click="saveDestination(index); addSuccess(dest.name)">Add to List</button>
-                        <button>Learn More</button>
+                        <button>Reviews</button>
                     </div>
                 </li>
             </transition-group>
             <em v-if="searchResult.length <= 0">Searching</em>
         </div>
-        <app-success @close-modal="closeModal(data)" v-if="added" v-bind:destination="destName" class="success-message"></app-success>
+        <app-success @close-modal="closeModal" v-if="added" v-bind:destination="destName" class="success-message"></app-success>
     </div>
 </template>
 
@@ -51,11 +51,9 @@
             addSuccess(name) {
                 this.destName = name;
                 this.added = !this.added;
-                console.log(this.added);
             },
-            closeModal(data) {
-                console.log(data);
-                this.added = data;
+            closeModal($event) {
+                this.added = $event;
             },
             clearSearch() {
                 if (this.searchQuery == 'Type Destination') {

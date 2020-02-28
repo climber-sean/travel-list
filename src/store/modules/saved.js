@@ -19,7 +19,20 @@ const actions = {
     saveDestination: ({commit, state, rootState, rootGetters}, index) => {
         console.log(rootState.search.sortedInfo);
         let data = rootState.search.sortedInfo[index];
-        commit('addToList', data);
+        var i;
+        var check = 'false';
+        if (state.savedDest.length > 0) {
+            for (i = 0; i <= rootState.search.sortedInfo.length; i++) {
+                if (state.savedDest[i].name === data.name) {
+                    check = 'true';
+                };
+            }
+        }
+        if (check === 'false') {
+            commit('addToList', data);
+        } else {
+            alert('ERROR');
+        }
     }
 }
 
