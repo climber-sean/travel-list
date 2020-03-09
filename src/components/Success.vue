@@ -2,7 +2,8 @@
     <div>
         <div class="success-message__modal">
             <div class="modal__text">
-                You have successfully added {{ destination }} to your list!
+                <p v-if="messageType">You have successfully added {{ destination }} to your list!</p>
+                <p v-else>{{ destination }} is already in your list!</p>
                 <button @click="closeModal">Close</button>
             </div>
         </div>
@@ -13,6 +14,7 @@
 export default {
     props: {
         destination: String,
+        messageType: Boolean
     },
     methods: {
         closeModal() {

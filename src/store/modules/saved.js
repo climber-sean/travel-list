@@ -1,10 +1,14 @@
 const state = {
-    savedDest: []
+    savedDest: [],
+    successStatus: null
 }
 
 const getters = {
     savedDestinations: state => {
         return state.savedDest;
+    },
+    success: state => {
+        return state.successStatus;
     }
 }
 
@@ -12,26 +16,35 @@ const mutations = {
     addToList: (state, data) => {
         state.savedDest.push(data);
         console.log(state.savedDest);
+    },
+    // Mutation below controls what success message is show
+    successMessage: (state, success) => {
+        if (success == true) {
+            state.successStatus = true;
+        } else {
+            state.successStatus = false;
+        }
     }
 }
 
 const actions = {
-    saveDestination: ({commit, state, rootState, rootGetters}, index) => {
-        console.log(rootState.search.sortedInfo);
+    saveDestination: ({commit, state, rootState}, index) => {
         let data = rootState.search.sortedInfo[index];
-        var i;
-        var check = 'false';
+        let i;
+        let check = false;
+        // Checks to see if destination exists in SavedDest array
         if (state.savedDest.length > 0) {
-            for (i = 0; i <= rootState.search.sortedInfo.length; i++) {
+            for (i = 0; i < state.savedDest.length; i++) {
                 if (state.savedDest[i].name === data.name) {
-                    check = 'true';
+                    check = true; // Change check to true if destination exists
                 };
             }
         }
-        if (check === 'false') {
+        if (check === false) { // Push new destination to array if doesnt exist
             commit('addToList', data);
+            commit('successMessage', true);
         } else {
-            alert('ERROR');
+            commit('successMessage', false); 
         }
     }
 }

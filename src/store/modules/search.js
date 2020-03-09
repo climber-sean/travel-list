@@ -6,12 +6,16 @@ Vue.prototype.$http = axios;
 const state = {
     // Stores the results of the search
     sortedInfo: [],
+    searchStatus: 'Search results...'
 }
 
 const getters = {
     // Returns search results
     searchResult: state => {
         return state.sortedInfo;
+    },
+    searchStatus: state => {
+        return state.searchStatus
     }
 }
 
@@ -28,11 +32,15 @@ const mutations = {
         }
         console.log(state.sortedInfo);
     },
+    setSearchStatus: state => {
+        state.searchStatus = 'Searching...';
+    }
 }
 
 const actions = {
     // API CALL
     locationSearch({commit}, payload) {
+        commit('setSearchStatus');
         state.sortedInfo = [];
         Vue.prototype.$http.get('https://tripadvisor1.p.rapidapi.com/locations/search', {
             headers: 

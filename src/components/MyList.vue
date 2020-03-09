@@ -64,7 +64,7 @@ export default {
 
         &__item {
         flex: 1 1 calc(100% / 3 - 20px);
-        max-height: 500px;
+        // max-height: 500px;
         border-radius: 25px;
         max-width: 400px;
         background: white;

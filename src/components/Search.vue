@@ -16,14 +16,14 @@
                             <p>Longitude: <span>{{ dest.longitude }}</span></p>
                             <p>Latitude: <span>{{ dest.latitude }}</span></p>
                         </div>
-                        <button @click="saveDestination(index); addSuccess(dest.name)">Add to List</button>
+                        <button @click="saveDestination(index), addSuccess(dest.name)">Add to List</button>
                         <button>Reviews</button>
                     </div>
                 </li>
             </transition-group>
-            <em v-if="searchResult.length <= 0">Searching</em>
+            <em v-if="searchResult.length <= 0">{{ searchStatus }}</em>
         </div>
-        <app-success @close-modal="closeModal" v-if="added" v-bind:destination="destName" class="success-message"></app-success>
+        <app-success @close-modal="closeModal" v-if="added" v-bind:messageType="success" v-bind:destination="destName" class="success-message"></app-success>
     </div>
 </template>
 
@@ -64,6 +64,8 @@
         computed: {
             ...mapGetters([
                 'searchResult',
+                'success',
+                'searchStatus'
             ])
         },
         components: {
@@ -109,6 +111,11 @@
 
     .search-container {
         margin-top: 50px;
+
+        em {
+            display: block;
+            text-align: center;
+        }
     }
 
     // list items enter animation
