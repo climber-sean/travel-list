@@ -24,6 +24,10 @@ const mutations = {
         } else {
             state.successStatus = false;
         }
+    },
+    deleteFromList: (state, data) => {
+        console.log(data);
+        state.savedDest.splice(data, 1);
     }
 }
 
@@ -46,6 +50,16 @@ const actions = {
         } else {
             commit('successMessage', false); 
         }
+    },
+    removeDestination: ({commit, state, rootState}, name) => {
+        let data = name;
+        let itemIndex;
+        state.savedDest.forEach((dest, i) => {
+            if (dest.name === data) {
+                itemIndex = i;
+            }
+        })
+        commit('deleteFromList', itemIndex);
     }
 }
 

@@ -13,7 +13,7 @@
                                 <p>Longitude: <span>{{ dest.longitude }}</span></p>
                                 <p>Latitude: <span>{{ dest.latitude }}</span></p>
                             </div>
-                            <button>Delete</button>
+                            <button @click="removeDestination(dest.name)">Delete</button>
                             <button>Visited</button>
                             <button>More</button>
                         </div>
@@ -27,14 +27,19 @@
 
 <script>
 import { mapGetters } from 'vuex';
+import { mapActions } from 'vuex';
 
 export default {
     computed: {
         ...mapGetters([
             'savedDestinations',
         ])
+    },
+    methods: {
+        ...mapActions([
+            'removeDestination'
+        ])
     }
-    
 }
 </script>
 
