@@ -17,13 +17,14 @@
                             <p>Latitude: <span>{{ dest.latitude }}</span></p>
                         </div>
                         <button @click="saveDestination(index), addSuccess(dest.name)">Add to List</button>
-                        <button @click="showReviews(dest.location_id)">Reviews</button>
+                        <button @click="showReviews(dest.location_id), reviewStatus(dest.name)">Reviews</button>
                     </div>
                 </li>
             </transition-group>
             <em v-if="searchResult.length <= 0">{{ searchStatus }}</em>
         </div>
         <app-success @close-modal="closeModal" v-if="added" v-bind:messageType="success" v-bind:destination="destName" class="success-message"></app-success>
+        <app-reviews @close-review-modal="closeReviewModal" v-if="showReviewsModal" v-bind:destination="reviewName" class="reviews"></app-reviews>
     </div>
 </template>
 
@@ -33,13 +34,16 @@
     import { mapMutations } from 'vuex';
 
     import Success from './Success.vue';
+    import Reviews from './Reviews.vue';
 
     export default {
         data() {
             return {
                 searchQuery: 'Type Destination',
                 added: false,
-                destName: ''
+                destName: '',
+                showReviewsModal: false,
+                reviewName: ''
             }
         },
         methods: {
@@ -54,13 +58,22 @@
                 this.added = !this.added;
             },
             closeModal($event) {
+                console.log($event);
                 this.added = $event;
+            },
+            closeReviewModal($event) {
+                console.log($event);
+                this.showReviewsModal = $event
             },
             clearSearch() {
                 if (this.searchQuery == 'Type Destination') {
                     this.searchQuery = '';
                 }
             },
+            reviewStatus(name) {
+                this.showReviewsModal = true;
+                this.reviewName = name
+            }
         },
         computed: {
             ...mapGetters([
@@ -70,7 +83,8 @@
             ])
         },
         components: {
-            AppSuccess: Success
+            AppSuccess: Success,
+            AppReviews: Reviews
         }
     }
 </script>
@@ -171,6 +185,8 @@
 
         img {
             border-radius: 10px;
+            max-height: 150px;
+            max-width: 150px;
         }
 
         .item-info {

@@ -16,7 +16,10 @@ const getters = {
         return state.sortedInfo;
     },
     searchStatus: state => {
-        return state.searchStatus
+        return state.searchStatus;
+    },
+    reviewResult: state => {
+        return state.currentReview;
     }
 }
 
@@ -71,7 +74,7 @@ const actions = {
             },
             params: {
                 "location_id" : payload,
-                "limit": 10
+                "limit": "15"
             }
         }).then(response => {
             commit('setReview', response);
