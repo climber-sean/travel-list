@@ -6,7 +6,8 @@ Vue.prototype.$http = axios;
 const state = {
     // Stores the results of the search
     sortedInfo: [],
-    searchStatus: 'Search results...'
+    searchStatus: 'Search results...',
+    currentReview: []
 }
 
 const getters = {
@@ -34,6 +35,14 @@ const mutations = {
     },
     setSearchStatus: state => {
         state.searchStatus = 'Searching...';
+    },
+    setReview: (state, response) => {
+        if (response !== null) {
+            response.data.data.forEach(element => {
+                state.currentReview.push(element);
+            });
+            console.log(state.currentReview);
+        }
     }
 }
 
@@ -53,6 +62,20 @@ const actions = {
         }).then(response => {
             commit('setSearch', response);
         });
+    },
+    showReviews: ({commit}, payload) => {
+        Vue.prototype.$http.get('https://tripadvisor1.p.rapidapi.com/reviews/list', {
+            headers: {
+                "X-RapidApi-Host" : "tripadvisor1.p.rapidapi.com",
+                "X-RapidApi-Key": "LxX7ezO7o9mshQTSmxDDbxkYdumap1RHxMgjsnit8M8qw3jJII"
+            },
+            params: {
+                "location_id" : payload,
+                "limit": 10
+            }
+        }).then(response => {
+            commit('setReview', response);
+        })
     },
     getDestination: (state, index) => {
         console.log(state.sortedInfo[index]);

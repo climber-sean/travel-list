@@ -17,7 +17,7 @@
                             <p>Latitude: <span>{{ dest.latitude }}</span></p>
                         </div>
                         <button @click="saveDestination(index), addSuccess(dest.name)">Add to List</button>
-                        <button>Reviews</button>
+                        <button @click="showReviews(dest.location_id)">Reviews</button>
                     </div>
                 </li>
             </transition-group>
@@ -46,7 +46,8 @@
             ...mapActions([
                 'locationSearch',
                 'setSearch',
-                'saveDestination'
+                'saveDestination',
+                'showReviews'
             ]),
             addSuccess(name) {
                 this.destName = name;

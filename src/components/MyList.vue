@@ -3,12 +3,31 @@
         <div class="container">
 
             <div class="my-lists__saved">
-                <h1>Saved Destinations</h1>
+                <h2>Saved Destinations</h2>
                 <ul class="saved-list">
                     <li v-for="(dest, index) in savedDestinations" :key="dest.location_id" class="saved-list__item">
                         <img class="responsive-img" :src="dest.photo.images.small.url" />
                         <div class="item-info">
-                            <h2>{{ dest.name }}</h2>
+                            <h3>{{ dest.name }}</h3>
+                            <div class="co-ords">
+                                <p>Longitude: <span>{{ dest.longitude }}</span></p>
+                                <p>Latitude: <span>{{ dest.latitude }}</span></p>
+                            </div>
+                            <button @click="removeDestination(dest.name)">Delete</button>
+                            <button @click="visitDestination(index)">Visited</button>
+                            <button>More</button>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="my-lists__visited">
+                <h2>Visited Destinations</h2>
+                <ul class="visited-list">
+                    <li v-for="(dest, index) in visitedDestinations" :key="dest.location_id" class="saved-list__item">
+                        <img :src="dest.photo.images.small.url" class="responsive-img">
+                        <div class="item-info">
+                            <h3>{{ dest.name }}</h3>
                             <div class="co-ords">
                                 <p>Longitude: <span>{{ dest.longitude }}</span></p>
                                 <p>Latitude: <span>{{ dest.latitude }}</span></p>
@@ -33,11 +52,13 @@ export default {
     computed: {
         ...mapGetters([
             'savedDestinations',
+            'visitedDestinations'
         ])
     },
     methods: {
         ...mapActions([
-            'removeDestination'
+            'removeDestination',
+            'visitDestination'
         ])
     }
 }
@@ -47,19 +68,26 @@ export default {
 
 .my-lists {
     margin-top: 50px;
+
+    .container {
+        display: flex;
+        justify-content: space-around;
+    }
 }
 
-.my-lists__saved {
+.my-lists__saved,
+.my-lists__visited {
     width: 420px;
     text-align: center;
     padding: 15px 0;
     
-    h1 {
+    h2 {
         margin: 0;
     }
 }
 
-.saved-list {
+.saved-list,
+.visited-list {
     list-style: none;
     display: flex;
     flex-wrap: wrap;
@@ -95,7 +123,7 @@ export default {
                 margin-bottom: 10px;
             }
 
-            h2 {
+            h3 {
                 font-family: 'Montserrat', sans-serif;
                 font-size: 20px;
                 margin: 0;

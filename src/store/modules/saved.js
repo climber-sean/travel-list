@@ -1,11 +1,15 @@
 const state = {
     savedDest: [],
-    successStatus: null
+    successStatus: null,
+    visitedDest: []
 }
 
 const getters = {
     savedDestinations: state => {
         return state.savedDest;
+    },
+    visitedDestinations: state => {
+        return state.visitedDest;
     },
     success: state => {
         return state.successStatus;
@@ -16,6 +20,9 @@ const mutations = {
     addToList: (state, data) => {
         state.savedDest.push(data);
         console.log(state.savedDest);
+    },
+    addToVisitList: (state, data) => {
+        state.visitedDest.push(data);
     },
     // Mutation below controls what success message is show
     successMessage: (state, success) => {
@@ -32,6 +39,11 @@ const mutations = {
 }
 
 const actions = {
+    visitDestination: ({commit, state, rootState}, index) => {
+        let data = state.savedDest[index];
+        commit('addToVisitList', data);
+        commit('deleteFromList', data);
+    },
     saveDestination: ({commit, state, rootState}, index) => {
         let data = rootState.search.sortedInfo[index];
         let i;
