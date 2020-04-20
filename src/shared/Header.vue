@@ -3,7 +3,7 @@
         <div class="container">
             <div class="header">
                 <div class="header__left">
-                    <h1>TravelList</h1>
+                    <h1>TravelList is the best</h1>
                 </div>
                 <div class="header__right">
                     <router-link to="/search">Search</router-link>
