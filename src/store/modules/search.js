@@ -34,7 +34,6 @@ const mutations = {
                 }
             });
         }
-        console.log(state.sortedInfo);
     },
     setSearchStatus: state => {
         state.searchStatus = 'Searching...';
@@ -44,7 +43,6 @@ const mutations = {
             response.data.data.forEach(element => {
                 state.currentReview.push(element);
             });
-            console.log(state.currentReview);
         }
     }
 }

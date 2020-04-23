@@ -14,7 +14,7 @@
                                 <p>Latitude: <span>{{ dest.latitude }}</span></p>
                             </div>
                             <button @click="removeDestination(dest.name)">Delete</button>
-                            <button @click="visitDestination(index)">Visited</button>
+                            <button @click="passDestination(dest, index)">Visited</button>
                             <button>More</button>
                         </div>
                     </li>
@@ -32,13 +32,13 @@
                                 <p>Longitude: <span>{{ dest.longitude }}</span></p>
                                 <p>Latitude: <span>{{ dest.latitude }}</span></p>
                             </div>
-                            <button @click="removeDestination(dest.name)">Delete</button>
-                            <button>Visited</button>
-                            <button>More</button>
+                            <span>{{ dest.startDate }} - {{ dest.endDate }}</span>
                         </div>
                     </li>
                 </ul>
             </div>
+
+            <app-date-picker @close-date-modal="showDatePicker = !showDatePicker" :destIndex="destIndex" v-if="showDatePicker"></app-date-picker>
 
         </div>
     </div>
@@ -47,8 +47,15 @@
 <script>
 import { mapGetters } from 'vuex';
 import { mapActions } from 'vuex';
+import VisitedDatePicker from './VisitedDatePicker.vue';
 
 export default {
+    data () {
+        return {
+            destIndex: null,
+            showDatePicker: false
+        }
+    },
     computed: {
         ...mapGetters([
             'savedDestinations',
@@ -59,7 +66,15 @@ export default {
         ...mapActions([
             'removeDestination',
             'visitDestination'
-        ])
+        ]),
+        passDestination(dest, index) {
+            this.destObj = dest;
+            this.destIndex = index;
+            this.showDatePicker = !this.showDatePicker;
+        }
+    },
+    components: {
+        appDatePicker: VisitedDatePicker
     }
 }
 </script>

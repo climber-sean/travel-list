@@ -19,7 +19,6 @@ const getters = {
 const mutations = {
     addToList: (state, data) => {
         state.savedDest.push(data);
-        console.log(state.savedDest);
     },
     addToVisitList: (state, data) => {
         state.visitedDest.push(data);
@@ -33,16 +32,17 @@ const mutations = {
         }
     },
     deleteFromList: (state, data) => {
-        console.log(data);
         state.savedDest.splice(data, 1);
     }
 }
 
 const actions = {
-    visitDestination: ({commit, state, rootState}, index) => {
-        let data = state.savedDest[index];
+    visitDestination: ({commit, state, rootState}, args) => {
+        let data = state.savedDest[args[0]];
+        data.startDate = args[1],
+        data.endDate = args[2],
         commit('addToVisitList', data);
-        commit('deleteFromList', data);
+        commit('deleteFromList', args[0]);
     },
     saveDestination: ({commit, state, rootState}, index) => {
         let data = rootState.search.sortedInfo[index];
