@@ -40,7 +40,9 @@
 
         </div>
 
+        <transition name="slide-fade">
         <app-date-picker @close-date-modal="showDatePicker = !showDatePicker" :destIndex="destIndex" v-if="showDatePicker" class="date-picker"></app-date-picker>
+        </transition>
 
     </div>
 </template>

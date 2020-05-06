@@ -23,8 +23,10 @@
             </transition-group>
             <em v-if="searchResult.length <= 0">{{ searchStatus }}</em>
         </div>
+        <transition name="slide-fade">
         <app-success @close-modal="closeModal" v-if="added" v-bind:messageType="success" v-bind:destination="destName" class="success-message"></app-success>
         <app-reviews @close-review-modal="closeReviewModal" v-if="showReviewsModal" v-bind:destination="reviewName" class="reviews"></app-reviews>
+        </transition>
     </div>
 </template>
 

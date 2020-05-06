@@ -47,6 +47,7 @@ const actions = {
     saveDestination: ({commit, state, rootState}, index) => {
         let data = rootState.search.sortedInfo[index];
         let i;
+        let ii;
         let check = false;
         // Checks to see if destination exists in SavedDest array
         if (state.savedDest.length > 0) {
