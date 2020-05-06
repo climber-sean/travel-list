@@ -44,4 +44,8 @@ export default {
     width: auto;
     height: 100%;
   }
+
+  .blur-element {
+    opacity: 0.2;
+  }
 </style>

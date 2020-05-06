@@ -1,6 +1,6 @@
 <template>
     <div class="my-lists">
-        <div class="container">
+        <div :class="{ 'blur-element': showDatePicker }" class="container">
 
             <div class="my-lists__saved">
                 <h2>Saved Destinations</h2>
@@ -38,9 +38,10 @@
                 </ul>
             </div>
 
-            <app-date-picker @close-date-modal="showDatePicker = !showDatePicker" :destIndex="destIndex" v-if="showDatePicker"></app-date-picker>
-
         </div>
+
+        <app-date-picker @close-date-modal="showDatePicker = !showDatePicker" :destIndex="destIndex" v-if="showDatePicker" class="date-picker"></app-date-picker>
+
     </div>
 </template>
 
@@ -83,6 +84,7 @@ export default {
 
 .my-lists {
     margin-top: 50px;
+    position: relative;
 
     .container {
         display: flex;

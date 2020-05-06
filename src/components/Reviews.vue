@@ -35,7 +35,6 @@ export default {
 
 <style lang="scss">
     .reviews {
-        background: rgba(0,0,0,0.5);
         display: flex;
         justify-content: center;
         align-items: center;

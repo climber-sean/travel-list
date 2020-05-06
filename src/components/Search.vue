@@ -1,12 +1,12 @@
 <template>
     <div class="search">
-        <div class="container">
+        <div class="container" :class="{ 'blur-element': added || showReviewsModal }" >
             <div class="search-bar">
                 <input v-model="searchQuery" @click="clearSearch" @keydown.enter="locationSearch(searchQuery)" type="text" class="search-bar__input">
                 <button @click="locationSearch(searchQuery)" class="search-bar__button">Search</button>
             </div>
         </div>
-        <div class="search-container">
+        <div :class="{ 'blur-element': added || showReviewsModal }" class="search-container">
             <transition-group class="search-results" name="growEnter" tag="ul">
                 <li class="search-results__item" v-for="(dest, index) in searchResult" :key="dest.location_id">
                     <img class="responsive-img" :src="dest.photo.images.small.url" />
@@ -90,6 +90,7 @@
 </script>
 
 <style lang="scss">
+
     .search {
         padding: 40px 0;
     }

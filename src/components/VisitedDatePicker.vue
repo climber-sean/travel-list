@@ -1,5 +1,6 @@
 <template>
-    <div>
+<div>
+    <div class="date-picker__modal">
         <h2>Visited</h2>
         <p>Please select the date range for when you visited.</p>
         <v-date-picker
@@ -8,6 +9,7 @@
         v-model="visitedDate"></v-date-picker>
         <button @click="logDates(destIndex)">Confirm</button>
     </div>
+</div>
 </template>
 
 <script>
@@ -52,5 +54,24 @@ export default {
 </script>
 
 <style lang="scss">
+.date-picker {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    height: 100vh;
+    width: 100%;
+    z-index: 999;
+    top: 0;
 
+    &__modal {
+        width: 400px;
+        height: 300px;
+        border-radius: 25px;
+        background: whitesmoke;
+        padding: 20px;
+        box-sizing: border-box;
+        text-align: center;
+    }
+}
 </style>
