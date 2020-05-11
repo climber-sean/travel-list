@@ -7,7 +7,6 @@ import VCalendar from 'v-calendar';
 import { appStore } from './store/store';
 import { routes } from './routes';
 
-// Vue.prototype.$http = axios;
 Vue.use(VueRouter);
 
 // export const searchBus = new Vue();

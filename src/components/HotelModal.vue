@@ -2,6 +2,7 @@
     <div>
         <div class="hotel__modal">
             <h2>Hotels</h2>
+            <h3>In {{ hotelName }}</h3>
             <app-hotel-form></app-hotel-form>
         </div>
     </div>
@@ -9,10 +10,16 @@
 
 <script>
 import HotelForm from './HotelForm'
+import { mapGetters } from 'vuex'
 
 export default {
     components: {
         appHotelForm: HotelForm
+    },
+    computed: {
+        ...mapGetters([
+            'hotelName'
+        ])
     }
 }
 </script>
@@ -30,7 +37,7 @@ export default {
 
     &__modal {
         width: 400px;
-        height: 300px;
+        height: auto;
         border-radius: 25px;
         background: whitesmoke;
         padding: 20px;

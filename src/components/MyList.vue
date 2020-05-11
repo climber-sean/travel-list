@@ -1,6 +1,6 @@
 <template>
     <div class="my-lists">
-        <div :class="{ 'blur-element': showDatePicker }" class="container">
+        <div :class="{ 'blur-element': showDatePicker || hotelModal }" class="container">
 
             <div class="my-lists__saved">
                 <h2>Saved Destinations</h2>
@@ -15,7 +15,7 @@
                             </div>
                             <button @click="removeDestination(dest.name)">Delete</button>
                             <button @click="passDestination(dest, index)">Visited</button>
-                            <button @click="showHotel(locationTrim(dest.location_string))">Hotels</button>
+                            <button @click="getDestinationID(locationTrim(dest.location_string))">Hotels</button>
                         </div>
                     </li>
                 </ul>
@@ -42,7 +42,7 @@
 
         <transition name="slide-fade">
         <app-date-picker @close-date-modal="showDatePicker = !showDatePicker" :destIndex="destIndex" v-if="showDatePicker" class="date-picker"></app-date-picker>
-        <app-hotel-modal v-if="showHotelModal" class="hotel"></app-hotel-modal>
+        <app-hotel-modal v-if="hotelModal" class="hotel"></app-hotel-modal>
         </transition>
 
     </div>
@@ -65,14 +65,15 @@ export default {
     computed: {
         ...mapGetters([
             'savedDestinations',
-            'visitedDestinations'
+            'visitedDestinations',
+            'hotelModal'
         ])
     },
     methods: {
         ...mapActions([
             'removeDestination',
             'visitDestination',
-            'showHotel'
+            'getDestinationID'
         ]),
         passDestination(dest, index) {
             this.destObj = dest;
