@@ -102,20 +102,21 @@
 
         &__input {
             width: 80%;
-            height: 35px;
+            height: 45px;
             border-top-left-radius: 15px;
             border-bottom-left-radius: 15px;
             padding-left: 15px;
             border: 1px solid whitesmoke;
             font-size: 12px;
             font-family: 'Montserrat', sans-serif;
+            outline: none;
         }
 
         &__button {
             margin: 0;
             margin-left: -5px;
             border: none;
-            height: 35px;
+            height: 45px;
             box-shadow: none;
             text-shadow: none;
             color: white;
@@ -133,6 +134,8 @@
         em {
             display: block;
             text-align: center;
+            font-family: 'Montserrat', sans-serif;
+            color: lighten(black,60%);
         }
     }
 
@@ -195,6 +198,7 @@
         .item-info {
 
             margin: 0 0 0 10px;
+            width: 100%;
 
             .co-ords {
                 margin-bottom: 10px;

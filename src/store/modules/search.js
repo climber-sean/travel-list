@@ -6,7 +6,7 @@ Vue.prototype.$http = axios;
 const state = {
     // Stores the results of the search
     sortedInfo: [],
-    searchStatus: 'Search results...',
+    searchStatus: 'Search for a destination e.g  \'Iceland\'',
     currentReview: []
 }
 

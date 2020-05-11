@@ -6,7 +6,7 @@
                     <h1>TravelList</h1>
                 </div>
                 <div class="header__right">
-                    <router-link to="/search">Search</router-link>
+                    <router-link to="/">Search</router-link>
                     <router-link to="/my-list">My List</router-link>
                 </div>
             </div>

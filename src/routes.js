@@ -3,6 +3,6 @@ import MyList from './components/MyList.vue';
 
 export const routes =
     [
-        { path: '/search', component: Search},
+        { path: '/', component: Search},
         { path: '/my-list', component: MyList}
     ];
