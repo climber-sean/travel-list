@@ -19,6 +19,7 @@ const getters = {
 const mutations = {
     addToList: (state, data) => {
         state.savedDest.push(data);
+        console.log(data);
     },
     addToVisitList: (state, data) => {
         state.visitedDest.push(data);

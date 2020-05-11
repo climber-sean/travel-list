@@ -15,7 +15,7 @@
                             </div>
                             <button @click="removeDestination(dest.name)">Delete</button>
                             <button @click="passDestination(dest, index)">Visited</button>
-                            <button>More</button>
+                            <button @click="showHotel(locationTrim(dest.location_string))">Hotels</button>
                         </div>
                     </li>
                 </ul>
@@ -42,6 +42,7 @@
 
         <transition name="slide-fade">
         <app-date-picker @close-date-modal="showDatePicker = !showDatePicker" :destIndex="destIndex" v-if="showDatePicker" class="date-picker"></app-date-picker>
+        <app-hotel-modal v-if="showHotelModal" class="hotel"></app-hotel-modal>
         </transition>
 
     </div>
@@ -51,12 +52,14 @@
 import { mapGetters } from 'vuex';
 import { mapActions } from 'vuex';
 import VisitedDatePicker from './VisitedDatePicker.vue';
+import HotelModal from './HotelModal';
 
 export default {
     data () {
         return {
             destIndex: null,
-            showDatePicker: false
+            showDatePicker: false,
+            showHotelModal: true
         }
     },
     computed: {
@@ -68,16 +71,28 @@ export default {
     methods: {
         ...mapActions([
             'removeDestination',
-            'visitDestination'
+            'visitDestination',
+            'showHotel'
         ]),
         passDestination(dest, index) {
             this.destObj = dest;
             this.destIndex = index;
             this.showDatePicker = !this.showDatePicker;
+        },
+        locationTrim(data) {
+            if (data.indexOf(',') > -1) {
+                var x = data.substring(0, data.indexOf(','));
+                console.log(x);
+                return x;
+            } else {
+                console.log(data)
+                return data
+            }
         }
     },
     components: {
-        appDatePicker: VisitedDatePicker
+        appDatePicker: VisitedDatePicker,
+        appHotelModal: HotelModal
     }
 }
 </script>
@@ -134,6 +149,8 @@ export default {
 
         img {
             border-radius: 10px;
+            max-height: 150px;
+            max-width: 150px;
         }
 
         .item-info {

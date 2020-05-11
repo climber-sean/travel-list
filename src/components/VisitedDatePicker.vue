@@ -44,7 +44,6 @@ export default {
                 startDate,
                 endDate
             ]
-            // this.$store.dispatch(visitDestination(index, startDate, endDate));
             this.visitDestination(args);
             this.visitedDate = '';
             this.$emit('close-date-modal');
