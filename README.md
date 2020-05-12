@@ -1,18 +1,6 @@
 # travel-list
 
-> A Vue.js project
+> A Vue.js project allowing the user to add locations and things to do their bucket list, keep track of places visited and also view hotels for destinations they have in their bucket list.
 
-## Build Setup
+Uses TripAdvisor and Hotels API
 
-``` bash
-# install dependencies
-npm install
-
-# serve with hot reload at localhost:8080
-npm run dev
-
-# build for production with minification
-npm run build
-```
-
-For detailed explanation on how things work, consult the [docs for vue-loader](http://vuejs.github.io/vue-loader).
