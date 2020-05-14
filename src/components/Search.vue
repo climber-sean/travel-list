@@ -1,11 +1,13 @@
 <template>
     <div class="search">
+        
         <div class="container" :class="{ 'blur-element': added || showReviewsModal }" >
             <div class="search-bar">
                 <input v-model="searchQuery" @click="clearSearch" @keydown.enter="locationSearch(searchQuery)" type="text" class="search-bar__input">
                 <button @click="locationSearch(searchQuery)" class="search-bar__button">Search</button>
             </div>
         </div>
+
         <div :class="{ 'blur-element': added || showReviewsModal }" class="search-container">
             <transition-group class="search-results" name="growEnter" tag="ul">
                 <li class="search-results__item" v-for="(dest, index) in searchResult" :key="dest.location_id">
@@ -21,16 +23,19 @@
                     </div>
                 </li>
             </transition-group>
-            <!-- <em v-if="searchResult.length <= 0">{{ searchStatus }}</em> -->
+
             <transition name="fade" mode="out-in">
-            <em v-if="!searchStatus">Search for a destination e.g 'Iceland'</em>
-            <app-loader v-if="searchStatus && searchResult.length == 0"></app-loader>
+                <em v-if="!searchStatus">Search for a destination e.g 'Iceland'</em>
+                <app-loader v-if="searchStatus && searchResult.length == 0"></app-loader>
             </transition>
+
         </div>
+
         <transition name="slide-fade">
-        <app-success @close-modal="closeModal" v-if="added" v-bind:messageType="success" v-bind:destination="destName" class="success-message"></app-success>
-        <app-reviews @close-review-modal="closeReviewModal" v-if="showReviewsModal" v-bind:destination="reviewName" class="reviews"></app-reviews>
+            <app-success @close-modal="closeModal" v-if="added" v-bind:messageType="success" v-bind:destination="destName" class="success-message"></app-success>
+            <app-reviews @close-review-modal="closeReviewModal" v-if="showReviewsModal" v-bind:destination="reviewName" class="reviews"></app-reviews>
         </transition>
+
     </div>
 </template>
 

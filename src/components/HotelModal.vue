@@ -3,22 +3,30 @@
         <div class="hotel__modal">
             <h2>Hotels</h2>
             <h3>In {{ hotelName }}</h3>
-            <app-hotel-form></app-hotel-form>
+            <app-hotel-form v-if="hotelForm"></app-hotel-form>
+            <app-loader v-show="!hotelForm && !hotelResult"></app-loader>
+            <app-hotel-results v-if="hotelResult"></app-hotel-results>
         </div>
     </div>
 </template>
 
 <script>
-import HotelForm from './HotelForm'
-import { mapGetters } from 'vuex'
+import HotelForm from './HotelForm';
+import Loader from './../shared/Loader';
+import HotelResults from './HotelResults';
+import { mapGetters } from 'vuex';
 
 export default {
     components: {
-        appHotelForm: HotelForm
+        appHotelForm: HotelForm,
+        appLoader: Loader,
+        appHotelResults: HotelResults
     },
     computed: {
         ...mapGetters([
-            'hotelName'
+            'hotelName',
+            'hotelForm',
+            'hotelResult'
         ])
     }
 }

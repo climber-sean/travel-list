@@ -6,7 +6,10 @@ Vue.prototype.$http = axios;
 const state = {
     hotelName: '',
     destinationID: '',
-    showHotelModal: false
+    showHotelModal: false,
+    showHotelForm: false,
+    showHotelResults: false,
+    hotelsList: []
 }
 
 const getters = {
@@ -15,16 +18,30 @@ const getters = {
     },
     hotelName: (state) => {
         return state.hotelName
+    },
+    hotelForm: (state) => {
+        return state.showHotelForm
+    },
+    hotelResult: (state) => {
+        return state.showHotelResults
+    },
+    hotelList: (state) => {
+        return state.hotelsList
     }
 }
 
 const mutations = {
     setDestinationID: (state, response) => {
         state.destinationID = response;
+        state.showHotelForm = !state.showHotelForm
         console.log(state.destinationID);
     },
     setHotels: (state, response) => {
-        console.log(response)
+        response.data.data.body.searchResults.results.forEach(element => {
+            state.hotelsList.push(element);
+        });
+        state.showHotelResults = !state.showHotelResults;
+        console.log(state.hotelsList);
     }
 }
 
@@ -48,6 +65,7 @@ const actions = {
         })
     },
     getHotels: ({commit, state}, payload) => {
+        state.showHotelForm = !state.showHotelForm
         Vue.prototype.$http.get('https://hotels3.p.rapidapi.com/properties/list', {
             headers: {
                 "X-RapidApi-Host" : "hotels4.p.rapidapi.com",
