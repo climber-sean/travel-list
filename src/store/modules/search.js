@@ -6,7 +6,7 @@ Vue.prototype.$http = axios;
 const state = {
     // Stores the results of the search
     sortedInfo: [],
-    searchStatus: 'Search for a destination e.g  \'Iceland\'',
+    searchStatus: false,
     currentReview: []
 }
 
@@ -36,7 +36,7 @@ const mutations = {
         }
     },
     setSearchStatus: state => {
-        state.searchStatus = 'Searching...';
+        state.searchStatus = true;
     },
     setReview: (state, response) => {
         if (response !== null) {

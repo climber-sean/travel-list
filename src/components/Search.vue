@@ -21,7 +21,11 @@
                     </div>
                 </li>
             </transition-group>
-            <em v-if="searchResult.length <= 0">{{ searchStatus }}</em>
+            <!-- <em v-if="searchResult.length <= 0">{{ searchStatus }}</em> -->
+            <transition name="fade" mode="out-in">
+            <em v-if="!searchStatus">Search for a destination e.g 'Iceland'</em>
+            <app-loader v-if="searchStatus && searchResult.length == 0"></app-loader>
+            </transition>
         </div>
         <transition name="slide-fade">
         <app-success @close-modal="closeModal" v-if="added" v-bind:messageType="success" v-bind:destination="destName" class="success-message"></app-success>
@@ -37,6 +41,7 @@
 
     import Success from './Success.vue';
     import Reviews from './Reviews.vue';
+    import Loader from './../shared/Loader.vue';
 
     export default {
         data() {
@@ -86,12 +91,15 @@
         },
         components: {
             AppSuccess: Success,
-            AppReviews: Reviews
+            AppReviews: Reviews,
+            AppLoader: Loader
         }
     }
 </script>
 
 <style lang="scss">
+
+@import './../assets/global.scss';
 
     .search {
         padding: 40px 0;

@@ -55,8 +55,7 @@ export default {
 .slide-fade-leave-active {
   transition: all .4s cubic-bezier(1.0, 0.5, 0.8, 1.0);
 }
-.slide-fade-enter, .slide-fade-leave-to
-/* .slide-fade-leave-active below version 2.1.8 */ {
+.slide-fade-enter, .slide-fade-leave-to {
   transform: translateY(100px);
   opacity: 0;
 }
