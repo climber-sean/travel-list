@@ -1,15 +1,20 @@
 import Vue from 'vue'
-// import axios from 'axios'
 import App from './App.vue'
 import VueRouter from 'vue-router';
 import VCalendar from 'v-calendar';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faCheckCircle } from '@fortawesome/free-solid-svg-icons';
+import { faTimesCircle } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+
+library.add(faCheckCircle, faTimesCircle);
+
+Vue.component('font-awesome-icon', FontAwesomeIcon);
 
 import { appStore } from './store/store';
 import { routes } from './routes';
 
 Vue.use(VueRouter);
-
-// export const searchBus = new Vue();
 
 const router = new VueRouter({
   routes

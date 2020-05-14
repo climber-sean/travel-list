@@ -2,9 +2,12 @@
     <div>
         <div class="success-message__modal">
             <div class="modal__text">
+                <font-awesome-icon v-if="messageType" :class="{ grow: growEle }" class="success-icon success-icon--check" :icon="['fas', 'check-circle']"></font-awesome-icon>
+                <font-awesome-icon v-else :class="{ grow: growEle }" class="success-icon success-icon--times" :icon="['fas', 'times-circle']"></font-awesome-icon>
                 <p v-if="messageType">You have successfully added {{ destination }} to your list!</p>
                 <p v-else>{{ destination }} is already in your list!</p>
                 <button @click="closeModal">Close</button>
+                <router-link to="/my-list">My List</router-link>
             </div>
         </div>
     </div>
@@ -12,15 +15,23 @@
 
 <script>
 export default {
+    mounted() {
+        this.growEle = !this.growEle
+    },
+    data() {
+        return {
+            growEle: false
+        }
+    },
     props: {
         destination: String,
-        messageType: Boolean
+        messageType: Boolean,
     },
     methods: {
         closeModal() {
             this.$emit('close-modal', false);
         }
-    }
+    },
 }
 </script>
 
@@ -37,14 +48,75 @@ export default {
         top: 0;
 
         &__modal {
-            width: 400px;
-            height: 300px;
+            width: 320px;
+            height: auto;
             border-radius: 25px;
-            background: whitesmoke;
-            padding: 20px;
+            background: #fcfcfc;
+            padding: 20px 10px;
             box-sizing: border-box;
             text-align: center;
+            box-shadow: 0 0 10px 4px rgba(0,0,0,0.2);
+
+            p {
+                font-family: 'Montserrat';
+                margin: 30px 0 40px 0;
+            }
+
+            button, a {
+                padding: 8px 24px;
+                background: #3ea167;
+                text-decoration: none;
+                color: white;
+                font-family: 'Montserrat';
+                font-size: 12px;
+                margin: 0 5px;
+                border-radius: 3px;
+                box-shadow: 0 6px 5px -5px rgba(0,0,0,0.4);
+                transition: all 0.1s linear;
+
+                &:hover {
+                    background: darken(#3ea167, 10%);
+                }
+            }
+
+            button {
+                background: #b02727;
+
+                &:hover {
+                    background: darken(#b02727, 10%) !important;
+                }
+            }
         }
+    }
+
+    @keyframes grow {
+        0% {
+            transform: scale(0)
+        }
+        80% {
+            transform: scale(1.1);
+        }
+        100% {
+            transform: scale(1)
+        }
+    }
+
+    .success-icon {
+        font-size: 48px;
+        transform: scale(0);
+
+        &--check {
+            color: green;
+        }
+
+        &--times {
+            color: red;
+        }
+
+        &.grow {
+            animation: grow 0.4s ease-in forwards 0.2s;
+        }
+
     }
 </style>
 

@@ -31,6 +31,16 @@ export default {
     box-sizing: border-box;
   }
 
+  button {
+    background: none;
+    color: inherit;
+    border: none;
+    padding: 0;
+    font: inherit;
+    cursor: pointer;
+    outline: inherit;
+  }
+
   body {
     margin: 0px;
   }
@@ -46,10 +56,10 @@ export default {
   }
 
   .blur-element {
-    opacity: 0.2;
+    opacity: 0.05;
   }
 
-  .slide-fade-enter-active {
+.slide-fade-enter-active {
   transition: all .4s ease;
 }
 .slide-fade-leave-active {

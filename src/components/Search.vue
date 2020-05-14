@@ -55,7 +55,7 @@
                 added: false,
                 destName: '',
                 showReviewsModal: false,
-                reviewName: ''
+                reviewName: '',
             }
         },
         methods: {
