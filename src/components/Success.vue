@@ -6,8 +6,8 @@
                 <font-awesome-icon v-else :class="{ grow: growEle }" class="success-icon success-icon--times" :icon="['fas', 'times-circle']"></font-awesome-icon>
                 <p v-if="messageType">You have successfully added {{ destination }} to your list!</p>
                 <p v-else>{{ destination }} is already in your list!</p>
-                <button @click="closeModal">Close</button>
-                <router-link to="/my-list">My List</router-link>
+                <app-button :on-click="closeModal" :btn-type="'red'">Close</app-button>
+                <app-button :on-click="myList" :btn-type="'green'">My List</app-button>
             </div>
         </div>
     </div>
@@ -30,6 +30,12 @@ export default {
     methods: {
         closeModal() {
             this.$emit('close-modal', false);
+        },
+        consoleSuccess() {
+            console.log('This button works');
+        },
+        myList() {
+            this.$router.push('my-list')
         }
     },
 }
@@ -62,30 +68,30 @@ export default {
                 margin: 30px 0 40px 0;
             }
 
-            button, a {
-                padding: 8px 24px;
-                background: #3ea167;
-                text-decoration: none;
-                color: white;
-                font-family: 'Montserrat';
-                font-size: 12px;
-                margin: 0 5px;
-                border-radius: 3px;
-                box-shadow: 0 6px 5px -5px rgba(0,0,0,0.4);
-                transition: all 0.1s linear;
+            // button, a {
+            //     padding: 8px 24px;
+            //     background: #3ea167;
+            //     text-decoration: none;
+            //     color: white;
+            //     font-family: 'Montserrat';
+            //     font-size: 12px;
+            //     margin: 0 5px;
+            //     border-radius: 3px;
+            //     box-shadow: 0 6px 5px -5px rgba(0,0,0,0.4);
+            //     transition: all 0.1s linear;
 
-                &:hover {
-                    background: darken(#3ea167, 10%);
-                }
-            }
+            //     &:hover {
+            //         background: darken(#3ea167, 10%);
+            //     }
+            // }
 
-            button {
-                background: #b02727;
+            // button {
+            //     background: #b02727;
 
-                &:hover {
-                    background: darken(#b02727, 10%) !important;
-                }
-            }
+            //     &:hover {
+            //         background: darken(#b02727, 10%) !important;
+            //     }
+            // }
         }
     }
 
