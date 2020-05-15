@@ -6,8 +6,8 @@
                 <font-awesome-icon v-else :class="{ grow: growEle }" class="success-icon success-icon--times" :icon="['fas', 'times-circle']"></font-awesome-icon>
                 <p v-if="messageType">You have successfully added {{ destination }} to your list!</p>
                 <p v-else>{{ destination }} is already in your list!</p>
-                <app-button :on-click="closeModal" :btn-type="'red'">Close</app-button>
-                <app-button :on-click="myList" :btn-type="'green'">My List</app-button>
+                <app-button @clicked="closeModal" :btn-type="'red'">Close</app-button>
+                <app-button @clicked="myList" :btn-type="'green'">My List</app-button>
             </div>
         </div>
     </div>

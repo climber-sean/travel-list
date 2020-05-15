@@ -13,9 +13,12 @@
                                 <p>Longitude: <span>{{ dest.longitude }}</span></p>
                                 <p>Latitude: <span>{{ dest.latitude }}</span></p>
                             </div>
-                            <button @click="removeDestination(dest.name)">Delete</button>
-                            <button @click="passDestination(dest, index)">Visited</button>
-                            <button @click="getDestinationID(locationTrim(dest.location_string))">Hotels</button>
+                            <!-- <button @click="removeDestination(dest.name)">Delete</button> -->
+                            <app-button @clicked="removeDestination(dest.name)" :btn-type="'red'">Remove</app-button>
+                            <!-- <button @click="passDestination(dest, index)">Visited</button> -->
+                            <app-button @clicked="passDestination(dest, index)" :btn-type="'green'">Visited</app-button>
+                            <!-- <button @click="getDestinationID(locationTrim(dest.location_string))">Hotels</button> -->
+                            <app-button @clicked="getDestinationID(locationTrim(dest.location_string))" :btn-type="'blue'">Hotels</app-button>
                         </div>
                     </li>
                 </ul>
@@ -179,17 +182,8 @@ export default {
             }
 
             button {
-                margin: 0;
-                border: none;
-                width: 100%;
-                box-shadow: none;
-                text-shadow: none;
-                font-family: 'Montserrat', sans-serif;
-                cursor: pointer;
                 margin: 4px 0;
-                padding: 5px 0;
-                background: lighten(black,30%);
-                color: white;
+                width: 100%;
             }
         }
     }

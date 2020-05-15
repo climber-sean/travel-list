@@ -1,5 +1,5 @@
 <template>
-    <button @click="onClick" class="btn" :class="'btn--' + btnType">
+    <button @click="clicked" class="btn" :class="'btn--' + btnType">
         <slot></slot>
     </button>
 </template>
@@ -7,12 +7,13 @@
 <script>
 export default {
     props: {
-        onClick: {
-            type: Function,
-            required: true
-        },
         btnType: String
     },
+    methods: {
+        clicked() {
+            this.$emit('clicked');
+        }
+    }
 }
 </script>
 

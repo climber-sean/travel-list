@@ -18,8 +18,10 @@
                             <p>Longitude: <span>{{ dest.longitude }}</span></p>
                             <p>Latitude: <span>{{ dest.latitude }}</span></p>
                         </div>
-                        <button @click="saveDestination(index), addSuccess(dest.name)">Add to List</button>
-                        <button @click="showReviews(dest.location_id), reviewStatus(dest.name)">Reviews</button>
+                        <!-- <button @click="saveDestination(index), addSuccess(dest.name)">Add to List</button> -->
+                        <app-button @clicked="saveDestination(index), addSuccess(dest.name)" :btn-type="'green'">Add to List</app-button>
+                        <!-- <button @click="showReviews(dest.location_id), reviewStatus(dest.name)">Reviews</button> -->
+                        <app-button @clicked="showReviews(dest.location_id), reviewStatus(dest.name)" :btn-type="'blue'">Reviews</app-button>
                     </div>
                 </li>
             </transition-group>
@@ -234,15 +236,8 @@
             }
 
             button {
-                margin: 0;
-                border: none;
-                width: 100%;
-                box-shadow: none;
-                text-shadow: none;
-                font-family: 'Montserrat', sans-serif;
-                cursor: pointer;
                 margin: 4px 0;
-                padding: 5px 0;
+                width: 100%;
             }
         }
         }
