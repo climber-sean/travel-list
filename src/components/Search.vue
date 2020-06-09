@@ -18,10 +18,8 @@
                             <p>Longitude: <span>{{ dest.longitude }}</span></p>
                             <p>Latitude: <span>{{ dest.latitude }}</span></p>
                         </div>
-                        <!-- <button @click="saveDestination(index), addSuccess(dest.name)">Add to List</button> -->
                         <app-button @clicked="saveDestination(index), addSuccess(dest.name)" :btn-type="'green'">Add to List</app-button>
-                        <!-- <button @click="showReviews(dest.location_id), reviewStatus(dest.name)">Reviews</button> -->
-                        <app-button @clicked="showReviews(dest.location_id), reviewStatus(dest.name)" :btn-type="'blue'">Reviews</app-button>
+                        <app-button @clicked="showReviews(dest.location_id), reviewStatus(dest.name, index)" :btn-type="'blue'">Reviews</app-button>
                     </div>
                 </li>
             </transition-group>
@@ -34,8 +32,8 @@
         </div>
 
         <transition name="slide-fade">
-            <app-success @close-modal="closeModal" v-if="added" v-bind:messageType="success" v-bind:destination="destName" class="success-message"></app-success>
-            <app-reviews @close-review-modal="closeReviewModal" v-if="showReviewsModal" v-bind:destination="reviewName" class="reviews"></app-reviews>
+            <app-success @close-modal="closeModal" v-if="added" :messageType="success" :destination="destName" class="success-message"></app-success>
+            <app-reviews @close-review-modal="closeReviewModal" @added-in-modal="successModal" v-if="showReviewsModal" :destination="reviewName" :destIndex="currReviewIndex" class="reviews"></app-reviews>
         </transition>
 
     </div>
@@ -58,6 +56,7 @@
                 destName: '',
                 showReviewsModal: false,
                 reviewName: '',
+                currReviewIndex: 0
             }
         },
         methods: {
@@ -72,11 +71,9 @@
                 this.added = !this.added;
             },
             closeModal($event) {
-                console.log($event);
                 this.added = $event;
             },
             closeReviewModal($event) {
-                console.log($event);
                 this.showReviewsModal = $event
             },
             clearSearch() {
@@ -84,9 +81,15 @@
                     this.searchQuery = '';
                 }
             },
-            reviewStatus(name) {
+            reviewStatus(name, index) {
                 this.showReviewsModal = true;
                 this.reviewName = name
+                this.currReviewIndex = index;
+            },
+            successModal($event) {
+                this.showReviewsModal = $event;
+                this.added = !this.added;
+                this.destName = this.reviewName;
             }
         },
         computed: {

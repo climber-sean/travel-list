@@ -2,12 +2,14 @@
     <div>
         <div class="reviews__modal">
             <h2>{{ destination }} Reviews</h2>
-            <ul>
+            <app-loader v-if="reviewStatus"></app-loader>
+            <ul v-if="!reviewStatus">
                 <li v-for="(review, index) in reviewResult" :key="index">
                     <span v-for="n in parseInt(review.rating)">&#9733</span>
                     <p>{{ review.text }}</p>
                 </li>
-                <button @click="closeModal">Close</button>
+                <button class="close-btn" @click="closeModal">Close</button>
+                <app-button @clicked="saveDestination(destIndex), addedInModal()" :btn-type="'green'">Add to List</app-button>
             </ul>
         </div>
     </div>
@@ -15,20 +17,34 @@
 
 <script>
 import { mapGetters } from 'vuex';
+import { mapActions } from 'vuex';
+import Loader from '../shared/Loader';
 
 export default {
     props: {
-        destination: String
+        destination: String,
+        destIndex: Number
     },
     computed: {
         ...mapGetters([
-            'reviewResult'
+            'reviewResult',
+            'reviewStatus'
         ])
     },
     methods: {
+        ...mapActions([
+            'saveDestination',
+            'clearReviewsArr'
+        ]),
         closeModal() {
             this.$emit('close-review-modal', false);
+        },
+        addedInModal() {
+            this.$emit('added-in-modal', false);
         }
+    },
+    components: {
+        appLoader: Loader
     }
 }
 </script>
@@ -46,19 +62,25 @@ export default {
 
         &__modal {
             width: 60%;
-            height: 80%;
+            height: 500px;
             border-radius: 25px;
-            background: whitesmoke;
+            background: white;
             padding: 20px;
             box-sizing: border-box;
             text-align: center;
             position: relative;
             overflow: hidden;
+            box-shadow: 0 0 10px 4px rgba(0,0,0,0.2);
+
+            h2 {
+                font-family: 'Montserrat', sans-serif;
+            }
 
             ul {
                 overflow-y: scroll;
-                height: 100%;
+                height: calc(100% - 70px);
                 list-style: none;
+                margin: 0;
 
                 li {
                     border: 1px solid rgba(0,0,0,0.1);
@@ -69,7 +91,7 @@ export default {
                 }
             }
 
-            button {
+            .close-btn {
                 position: absolute;
                 top: 10px;
                 left: 10px;

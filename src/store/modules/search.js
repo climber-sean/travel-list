@@ -7,7 +7,8 @@ const state = {
     // Stores the results of the search
     sortedInfo: [],
     searchStatus: false,
-    currentReview: []
+    currentReview: [],
+    reviewStatus: false
 }
 
 const getters = {
@@ -20,6 +21,9 @@ const getters = {
     },
     reviewResult: state => {
         return state.currentReview;
+    },
+    reviewStatus: state => {
+        return state.reviewStatus
     }
 }
 
@@ -39,11 +43,16 @@ const mutations = {
         state.searchStatus = true;
     },
     setReview: (state, response) => {
+        state.reviewStatus = false;
         if (response !== null) {
             response.data.data.forEach(element => {
                 state.currentReview.push(element);
             });
         }
+    },
+    setReviewStatus: state => {
+        state.currentReview = [];
+        state.reviewStatus = true;
     }
 }
 
@@ -65,6 +74,7 @@ const actions = {
         });
     },
     showReviews: ({commit}, payload) => {
+        commit('setReviewStatus');
         Vue.prototype.$http.get('https://tripadvisor1.p.rapidapi.com/reviews/list', {
             headers: {
                 "X-RapidApi-Host" : "tripadvisor1.p.rapidapi.com",
