@@ -1,13 +1,16 @@
 <template>
 <div>
     <div class="date-picker__modal">
+        <button class="close-btn" @click="closeModal"><font-awesome-icon :icon="['fas', 'times']"></font-awesome-icon></button>
         <h2>Visited</h2>
         <p>Please select the date range for when you visited.</p>
+        <p class="warning" v-if="dateNotPresent">No date range entered</p>
         <v-date-picker
         color="green"
         mode="range"
-        v-model="visitedDate"></v-date-picker>
-        <button @click="logDates(destIndex)">Confirm</button>
+        v-model="visitedDate"
+        class="d-pick"></v-date-picker>
+        <app-button @clicked="logDates(destIndex)" :btn-type="'green'">Confirm</app-button>
     </div>
 </div>
 </template>
@@ -21,7 +24,8 @@ import { mapActions } from 'vuex';
 export default {
     data() {
         return {
-            visitedDate: ''
+            visitedDate: '',
+            dateNotPresent: false
         }
     },
     props: {
@@ -37,22 +41,38 @@ export default {
             'visitDestination'
         ]),
         logDates(index) {
-            var startDate = this.visitedDate.start.toString().slice(4,15);
-            var endDate = this.visitedDate.end.toString().slice(4,15);
-            var args = [
-                index,
-                startDate,
-                endDate
-            ]
-            this.visitDestination(args);
-            this.visitedDate = '';
+            if (this.visitedDate) {
+                var startDate = this.visitedDate.start.toString().slice(4,15);
+                var endDate = this.visitedDate.end.toString().slice(4,15);
+                var args = [
+                    index,
+                    startDate,
+                    endDate
+                ]
+                this.visitDestination(args);
+                this.visitedDate = '';
+                this.$emit('close-date-modal');
+            } else {
+                this.dateNotPresent = true;
+            }
+        },
+        closeModal() {
             this.$emit('close-date-modal');
-        } 
+        }
+    },
+    computed: {
+        datePresent() {
+            if (this.visitedDate) {
+                return true;
+            }
+        }
     }
 }
 </script>
 
 <style lang="scss">
+@import '../assets/global.scss';
+
 .date-picker {
     display: flex;
     justify-content: center;
@@ -71,6 +91,36 @@ export default {
         padding: 20px;
         box-sizing: border-box;
         text-align: center;
+        position: relative;
+
+        .close-btn {
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            color: white;
+            width: 32px;
+            height: 32px;
+            font-size: 24px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: $button-red;
+            border-radius: 16px;
+        }
+
+        h2, p {
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .warning {
+            color: red;
+            font-size: 12px;
+        }
+
+        .d-pick {
+            display: block;
+            margin-bottom: 20px;
+        }
     }
 }
 </style>
