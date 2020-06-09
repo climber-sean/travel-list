@@ -8,9 +8,9 @@
                     <span v-for="n in parseInt(review.rating)">&#9733</span>
                     <p>{{ review.text }}</p>
                 </li>
-                <button class="close-btn" @click="closeModal">Close</button>
-                <app-button @clicked="saveDestination(destIndex), addedInModal()" :btn-type="'green'">Add to List</app-button>
+                <button class="close-btn" @click="closeModal"><font-awesome-icon :icon="['fas', 'times']"></font-awesome-icon></button>
             </ul>
+            <app-button @clicked="saveDestination(destIndex), addedInModal()" :btn-type="'green'">Add to List</app-button>
         </div>
     </div>
 </template>
@@ -50,6 +50,8 @@ export default {
 </script>
 
 <style lang="scss">
+@import './../assets/global.scss';
+
     .reviews {
         display: flex;
         justify-content: center;
@@ -62,14 +64,14 @@ export default {
 
         &__modal {
             width: 60%;
-            height: 500px;
+            height: auto;
             border-radius: 25px;
             background: white;
             padding: 20px;
             box-sizing: border-box;
             text-align: center;
             position: relative;
-            overflow: hidden;
+            // overflow: hidden;
             box-shadow: 0 0 10px 4px rgba(0,0,0,0.2);
 
             h2 {
@@ -78,23 +80,38 @@ export default {
 
             ul {
                 overflow-y: scroll;
-                height: calc(100% - 70px);
+                height: 500px;
                 list-style: none;
-                margin: 0;
+                margin: 0 0 20px 0;
 
                 li {
-                    border: 1px solid rgba(0,0,0,0.1);
+                    border-bottom: 1px solid rgba(0,0,0,0.1);
                     margin: 15px 0;
-                    border-radius: 10px;
                     padding: 0 10px;
                     text-align: left;
+                    font-family: 'Montserrat', sans-serif;
+                    font-size: 16px;
+
+                    span {
+                        color: goldenrod;
+                        font-size: 24px;
+                    }
                 }
             }
 
             .close-btn {
                 position: absolute;
-                top: 10px;
-                left: 10px;
+                top: -10px;
+                left: -10px;
+                color: white;
+                width: 32px;
+                height: 32px;
+                font-size: 24px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                background: $button-red;
+                border-radius: 16px;
             }
         }
     }

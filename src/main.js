@@ -5,13 +5,14 @@ import VCalendar from 'v-calendar';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faCheckCircle } from '@fortawesome/free-solid-svg-icons';
 import { faTimesCircle } from '@fortawesome/free-solid-svg-icons';
+import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
 import Button from './shared/Button';
 
 Vue.component('app-button', Button);
 
-library.add(faCheckCircle, faTimesCircle);
+library.add(faCheckCircle, faTimesCircle, faTimes);
 
 Vue.component('font-awesome-icon', FontAwesomeIcon);
 
