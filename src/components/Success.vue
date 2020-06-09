@@ -42,8 +42,9 @@ export default {
 </script>
 
 <style lang="scss">
+@import '../assets/global.scss';
+
     .success-message {
-        // background: rgba(255,255,255,0.5);
         display: flex;
         justify-content: center;
         align-items: center;
@@ -56,12 +57,7 @@ export default {
         &__modal {
             width: 320px;
             height: auto;
-            border-radius: 25px;
-            background: #fcfcfc;
-            padding: 20px 10px;
-            box-sizing: border-box;
-            text-align: center;
-            box-shadow: 0 0 10px 4px rgba(0,0,0,0.2);
+            @include modal;
 
             p {
                 font-family: 'Montserrat';

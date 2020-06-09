@@ -64,15 +64,8 @@ export default {
 
         &__modal {
             width: 60%;
-            height: auto;
-            border-radius: 25px;
-            background: white;
-            padding: 20px;
-            box-sizing: border-box;
-            text-align: center;
             position: relative;
-            // overflow: hidden;
-            box-shadow: 0 0 10px 4px rgba(0,0,0,0.2);
+            @include modal;
 
             h2 {
                 font-family: 'Montserrat', sans-serif;
@@ -83,6 +76,7 @@ export default {
                 height: 500px;
                 list-style: none;
                 margin: 0 0 20px 0;
+                padding: 0;
 
                 li {
                     border-bottom: 1px solid rgba(0,0,0,0.1);

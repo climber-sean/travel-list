@@ -6,6 +6,17 @@ $button-green: #3ea167;
 $button-red: #b02727;
 $button-blue: #3a77ff;
 
+// Modal
+
+@mixin modal {
+    background: #fcfcfc;
+    border-radius: 25px;
+    box-shadow: 0 0 10px 4px rgba(0,0,0,0.2);
+    box-sizing: border-box;
+    padding: 20px;
+    text-align: center;
+}
+
 // Transitions
 .fade-enter-active, .fade-leave-active {
     transition: all 0.4s ease-in;

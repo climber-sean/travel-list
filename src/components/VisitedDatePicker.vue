@@ -85,13 +85,8 @@ export default {
 
     &__modal {
         width: 400px;
-        height: 300px;
-        border-radius: 25px;
-        background: whitesmoke;
-        padding: 20px;
-        box-sizing: border-box;
-        text-align: center;
         position: relative;
+        @include modal;
 
         .close-btn {
             position: absolute;
