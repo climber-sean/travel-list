@@ -4,8 +4,9 @@
             <h2>Hotels</h2>
             <h3>In {{ hotelName }}</h3>
             <app-hotel-form v-if="hotelForm"></app-hotel-form>
-            <app-loader v-show="!hotelForm && !hotelResult"></app-loader>
+            <app-loader v-show="!hotelForm && !hotelResult && !hotelInfo"></app-loader>
             <app-hotel-results v-if="hotelResult"></app-hotel-results>
+            <app-hotel-info v-if="hotelInfo"></app-hotel-info>
         </div>
     </div>
 </template>
@@ -14,19 +15,22 @@
 import HotelForm from './HotelForm';
 import Loader from './../shared/Loader';
 import HotelResults from './HotelResults';
+import HotelInfo from './HotelInfo';
 import { mapGetters } from 'vuex';
 
 export default {
     components: {
         appHotelForm: HotelForm,
         appLoader: Loader,
-        appHotelResults: HotelResults
+        appHotelResults: HotelResults,
+        appHotelInfo: HotelInfo
     },
     computed: {
         ...mapGetters([
             'hotelName',
             'hotelForm',
-            'hotelResult'
+            'hotelResult',
+            'hotelInfo'
         ])
     }
 }

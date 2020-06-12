@@ -11,7 +11,8 @@ const state = {
     showHotelResults: false,
     showHotelInfo: false,
     hotelsList: [],
-    hotelInfo: {}
+    hotelInfo: {},
+    hotelPhotos: ''
 }
 
 const getters = {
@@ -29,6 +30,15 @@ const getters = {
     },
     hotelList: (state) => {
         return state.hotelsList
+    },
+    hotelInfo: (state) => {
+        return state.showHotelInfo
+    },
+    hotel: (state) => {
+        return state.hotelInfo
+    },
+    hotelPhotos: (state) => {
+        return state.hotelPhotos
     }
 }
 
@@ -47,7 +57,13 @@ const mutations = {
     },
     getHotel: (state, response) => {
         state.hotelInfo = response;
+        state.showHotelInfo = !state.showHotelInfo
         console.log(state.hotelInfo);
+        console.log(state.showHotelInfo);
+    },
+    setHotelPhotos: (state, response) => {
+        state.hotelPhotos = response;
+        console.log(state.hotelPhotos);
     }
 }
 
@@ -89,7 +105,8 @@ const actions = {
             commit('setHotels', response)
         })
     },
-    getHotelInfo: ({commit}, payload) => {
+    getHotelInfo: ({commit, state}, payload) => {
+        state.showHotelResults = !state.showHotelResults
         Vue.prototype.$http.get('https://hotels4.p.rapidapi.com/properties/get-details', {
             headers: {
                 "X-RapidApi-Host" : "hotels4.p.rapidapi.com",
@@ -101,6 +118,18 @@ const actions = {
             }
         }).then(response => {
             commit('getHotel', response.data.data)
+            Vue.prototype.$http.get('https://hotels4.p.rapidapi.com/properties/get-hotel-photos', {
+                headers: {
+                    "X-RapidApi-Host" : "hotels4.p.rapidapi.com",
+                    "X-RapidApi-Key" : "LxX7ezO7o9mshQTSmxDDbxkYdumap1RHxMgjsnit8M8qw3jJII",
+                    "useQueryString": true
+                },
+                params: {
+                    "id": payload
+                }
+            }).then(response => {
+                commit('setHotelPhotos', response);
+            })
         })
     }
 }
