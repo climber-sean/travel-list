@@ -69,6 +69,17 @@ export default {
 
             h2 {
                 font-family: 'Montserrat', sans-serif;
+
+                &:after {
+                    display: block;
+                    content: '';
+                    height: 2px;
+                    width: 150px;
+                    background: $primary-colour;
+                    position: relative;
+                    left: calc(50% - 75px);
+                    margin-top: 5px;
+                }
             }
 
             ul {

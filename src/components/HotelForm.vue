@@ -6,7 +6,7 @@
         <v-date-picker v-model="formData.checkin"></v-date-picker>
         <label for="check-out">Check-out Date</label>
         <v-date-picker v-model="formData.checkout"></v-date-picker>
-        <button @click="getHotels(formSubmission)">Test</button>
+        <app-button @clicked="getHotels(formSubmission)" :btn-type="'green'">Search</app-button>
     </div>
 </template>
 

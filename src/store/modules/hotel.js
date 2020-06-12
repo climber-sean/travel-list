@@ -9,7 +9,9 @@ const state = {
     showHotelModal: false,
     showHotelForm: false,
     showHotelResults: false,
-    hotelsList: []
+    showHotelInfo: false,
+    hotelsList: [],
+    hotelInfo: {}
 }
 
 const getters = {
@@ -42,6 +44,10 @@ const mutations = {
         });
         state.showHotelResults = !state.showHotelResults;
         console.log(state.hotelsList);
+    },
+    getHotel: (state, response) => {
+        state.hotelInfo = response;
+        console.log(state.hotelInfo);
     }
 }
 
@@ -81,6 +87,20 @@ const actions = {
             }
         }).then(response => {
             commit('setHotels', response)
+        })
+    },
+    getHotelInfo: ({commit}, payload) => {
+        Vue.prototype.$http.get('https://hotels4.p.rapidapi.com/properties/get-details', {
+            headers: {
+                "X-RapidApi-Host" : "hotels4.p.rapidapi.com",
+                "X-RapidApi-Key" : "LxX7ezO7o9mshQTSmxDDbxkYdumap1RHxMgjsnit8M8qw3jJII",
+                "useQueryString": true
+            },
+            params: {
+                "id": payload
+            }
+        }).then(response => {
+            commit('getHotel', response.data.data)
         })
     }
 }

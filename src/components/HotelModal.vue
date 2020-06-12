@@ -33,6 +33,8 @@ export default {
 </script>
 
 <style lang="scss">
+@import '../assets/global.scss';
+
 .hotel {
     display: flex;
     justify-content: center;
@@ -45,12 +47,31 @@ export default {
 
     &__modal {
         width: 400px;
-        height: auto;
-        border-radius: 25px;
-        background: whitesmoke;
-        padding: 20px;
-        box-sizing: border-box;
+        @include modal;
         text-align: center;
+
+        h2 {
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+        }
+
+        h3 {
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+            font-size: 14px;
+            margin-bottom: 10px;
+
+            &:after {
+                display: block;
+                content: '';
+                height: 2px;
+                width: 150px;
+                background: $primary-colour;
+                position: relative;
+                left: calc(50% - 75px);
+                margin-top: 5px;
+            }
+        }
     }
 }
 </style>

@@ -2,7 +2,17 @@
     <div>
         <ul>
             <li v-for="hotel in hotelList" :key="hotel.id">
-                <p>{{ hotel.name }}</p>
+                <div class="hotel-result">
+                    <div class="hotel-result__image">
+                        <img class="responsive-img" :src="hotel.thumbnailUrl" :alt="hotel.name">
+                    </div>
+                    <div class="hotel-result__info">
+                        <h2 class="info-title">{{ hotel.name }}</h2>
+                        <span class="info-address">{{ hotel.address.streetAddress }}</span>
+                        <span class="star-rating" v-for="n in parseInt(hotel.starRating)">&#9733</span>
+                        <app-button @clicked="getHotelInfo(hotel.id)" :btn-type="'blue'">More info</app-button>
+                    </div>
+                </div>
             </li>
         </ul>
     </div>
@@ -10,16 +20,75 @@
 
 <script>
 import { mapGetters } from 'vuex';
+import { mapActions } from 'vuex';
 
 export default {
     computed: {
         ...mapGetters([
             'hotelList'
         ])
+    },
+    methods: {
+        ...mapActions([
+            'getHotelInfo'
+        ])
     }
 }
 </script>
 
 <style lang="scss">
+@import '../assets/global.scss';
+
+ul {
+    height: 400px;
+    overflow-y: scroll;
+    padding: 0;
+    margin: 0;
+
+    li {
+        margin: 15px 0;
+    }
+}
+
+.hotel-result {
+    display: flex;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(0,0,0,0.2);
+
+    &__image {
+        width: 50%;
+
+        img {
+            max-height: 80px;
+        }
+    }
+
+    &__info {
+        width: 50%;
+        text-align: left;
+
+        .info-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 16px;
+            margin: 0;
+        }
+
+        .info-address {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 14px;
+            display: block;
+        }
+
+        .star-rating {
+            color: goldenrod;
+            display: inline-block;
+        }
+
+        button {
+            display: block;
+            margin: 5px 0 0 0;
+        }
+    }
+}
 
 </style>
