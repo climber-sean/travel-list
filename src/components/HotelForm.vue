@@ -6,7 +6,7 @@
         <v-date-picker v-model="formData.checkin"></v-date-picker>
         <label for="check-out">Check-out Date</label>
         <v-date-picker v-model="formData.checkout"></v-date-picker>
-        <app-button @clicked="getHotels(formSubmission)" :btn-type="'green'">Search</app-button>
+        <app-button @clicked="submitHotelForm" :btn-type="'green'">Search</app-button>
     </div>
 </template>
 
@@ -42,10 +42,10 @@ export default {
         ...mapActions([
             'getHotels'
         ]),
-        testFunction() {
+        submitHotelForm() {
             this.formSubmission.checkin = this.formatCheckIn;
             this.formSubmission.checkout = this.formatCheckOut;
-            console.log(this.formSubmission);
+            this.getHotels(this.formSubmission);
         }
     },
     computed: {

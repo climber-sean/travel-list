@@ -19,19 +19,11 @@
 import { mapGetters } from 'vuex';
 
 export default {
-    mounted() {
-        this.photoUrl();
-    },
     computed: {
         ...mapGetters([
             'hotel',
             'hotelPhotos'
         ])
-    },
-    methods: {
-        photoUrl() {
-            console.log(this.$store.getters.hotelPhotos);
-        }
     }
 }
 </script>

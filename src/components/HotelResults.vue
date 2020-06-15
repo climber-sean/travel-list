@@ -10,7 +10,7 @@
                         <h2 class="info-title">{{ hotel.name }}</h2>
                         <span class="info-address">{{ hotel.address.streetAddress }}</span>
                         <span class="star-rating" v-for="n in parseInt(hotel.starRating)">&#9733</span>
-                        <app-button @clicked="getHotelInfo(hotel.id)" :btn-type="'blue'">More info</app-button>
+                        <app-button @clicked="moreInfo(hotel.id)" :btn-type="'blue'">More info</app-button>
                     </div>
                 </div>
             </li>
@@ -25,13 +25,18 @@ import { mapActions } from 'vuex';
 export default {
     computed: {
         ...mapGetters([
-            'hotelList'
-        ])
+            'hotelList',
+            'hotelBookingLink'
+        ]),
     },
     methods: {
         ...mapActions([
             'getHotelInfo'
-        ])
+        ]),
+        moreInfo(hotelID) {
+            const url = 'https://hotels.com/dl/hotel/details.html?hotelId=' + hotelID + '&q-check-in=' + this.hotelBookingLink[1] + '&q-check-out=' + this.hotelBookingLink[2] + '&q-room-0-adults=' + this.hotelBookingLink[3]
+            window.open(url, '_blank');
+        }
     }
 }
 </script>
