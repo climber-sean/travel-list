@@ -8,7 +8,7 @@
                     <span v-for="n in parseInt(review.rating)">&#9733</span>
                     <p>{{ review.text }}</p>
                 </li>
-                <button class="close-btn" @click="closeModal"><font-awesome-icon :icon="['fas', 'times']"></font-awesome-icon></button>
+                <app-close-button class="close" @clicked="closeModal"></app-close-button>
             </ul>
             <app-button @clicked="saveDestination(destIndex), addedInModal()" :btn-type="'green'">Add to List</app-button>
         </div>
@@ -104,19 +104,10 @@ export default {
                 }
             }
 
-            .close-btn {
+            .close {
                 position: absolute;
                 top: -10px;
-                left: -10px;
-                color: white;
-                width: 32px;
-                height: 32px;
-                font-size: 24px;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                background: $button-red;
-                border-radius: 16px;
+                right: -10px;
             }
         }
     }

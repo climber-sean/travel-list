@@ -43,7 +43,7 @@
 
         <transition name="slide-fade">
         <app-date-picker @close-date-modal="showDatePicker = !showDatePicker" :destIndex="destIndex" v-if="showDatePicker" class="date-picker"></app-date-picker>
-        <app-hotel-modal v-if="hotelModal" class="hotel"></app-hotel-modal>
+        <app-hotel-modal v-if="hotelModal" @closeModal="closeModal" class="hotel"></app-hotel-modal>
         </transition>
 
     </div>
@@ -90,6 +90,9 @@ export default {
                 console.log(data)
                 return data
             }
+        },
+        closeModal() {
+            this.$store.commit('toggleHotelModal');
         }
     },
     components: {

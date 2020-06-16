@@ -9,7 +9,9 @@ import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
 import Button from './shared/Button';
+import CloseButton from './shared/CloseButton';
 
+Vue.component('app-close-button', CloseButton);
 Vue.component('app-button', Button);
 
 library.add(faCheckCircle, faTimesCircle, faTimes);

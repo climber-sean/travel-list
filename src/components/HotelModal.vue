@@ -7,6 +7,7 @@
             <app-loader v-show="!hotelForm && !hotelResult && !hotelInfo"></app-loader>
             <app-hotel-results v-if="hotelResult"></app-hotel-results>
             <app-hotel-info v-if="hotelInfo"></app-hotel-info>
+            <app-close-button @clicked="closeModal" class="close"></app-close-button>
         </div>
     </div>
 </template>
@@ -32,6 +33,11 @@ export default {
             'hotelResult',
             'hotelInfo'
         ])
+    },
+    methods: {
+        closeModal() {
+            this.$emit('closeModal');
+        }
     }
 }
 </script>
@@ -53,6 +59,13 @@ export default {
         width: 400px;
         @include modal;
         text-align: center;
+        position: relative;
+
+        .close {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+        }
 
         h2 {
             font-family: 'Montserrat', sans-serif;

@@ -70,6 +70,9 @@ const mutations = {
     setHotelPhotos: (state, response) => {
         state.hotelPhotos = response;
         console.log(state.hotelPhotos);
+    },
+    toggleHotelModal: (state) => {
+        state.showHotelModal = !state.showHotelModal;
     }
 }
 

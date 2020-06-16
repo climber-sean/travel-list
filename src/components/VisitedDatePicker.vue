@@ -1,7 +1,6 @@
 <template>
 <div>
     <div class="date-picker__modal">
-        <button class="close-btn" @click="closeModal"><font-awesome-icon :icon="['fas', 'times']"></font-awesome-icon></button>
         <h2>Visited</h2>
         <p>Please select the date range for when you visited.</p>
         <p class="warning" v-if="dateNotPresent">No date range entered</p>
@@ -10,6 +9,7 @@
         mode="range"
         v-model="visitedDate"
         class="d-pick"></v-date-picker>
+        <app-close-button @clicked="closeModal" class="close"></app-close-button>
         <app-button @clicked="logDates(destIndex)" :btn-type="'green'">Confirm</app-button>
     </div>
 </div>
@@ -88,19 +88,10 @@ export default {
         position: relative;
         @include modal;
 
-        .close-btn {
+        .close {
             position: absolute;
             top: -10px;
-            left: -10px;
-            color: white;
-            width: 32px;
-            height: 32px;
-            font-size: 24px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background: $button-red;
-            border-radius: 16px;
+            right: -10px;
         }
 
         h2, p {
