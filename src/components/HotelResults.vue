@@ -60,6 +60,11 @@ ul {
     padding: 10px 0;
     border-bottom: 1px solid rgba(0,0,0,0.2);
 
+    @media handheld, only screen and (max-width: $mobile) {
+        flex-direction: column;
+        align-items: center;
+    }
+
     &__image {
         width: 50%;
 
@@ -71,6 +76,11 @@ ul {
     &__info {
         width: 50%;
         text-align: left;
+
+        @media handheld, only screen and (max-width: $mobile) {
+            width: 100%;
+            text-align: center;
+        }
 
         .info-title {
             font-family: 'Montserrat', sans-serif;
@@ -92,6 +102,10 @@ ul {
         button {
             display: block;
             margin: 5px 0 0 0;
+
+            @media handheld, only screen and (max-width: $mobile) {
+                margin: 5px auto;
+            }
         }
     }
 }

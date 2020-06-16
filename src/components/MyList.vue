@@ -3,8 +3,8 @@
         <div :class="{ 'blur-element': showDatePicker || hotelModal }" class="container">
 
             <div class="my-lists__saved">
-                <h2>Saved Destinations</h2>
-                <ul class="saved-list">
+                <h2>Saved Destinations <span :class="{rotate: openSaveList}" @click="openSavedList">&#9660;</span></h2>
+                <ul class="saved-list" :class="{open: openSaveList}">
                     <li v-for="(dest, index) in savedDestinations" :key="dest.location_id" class="saved-list__item">
                         <img class="responsive-img" :src="dest.photo.images.small.url" />
                         <div class="item-info">
@@ -22,8 +22,8 @@
             </div>
 
             <div class="my-lists__visited">
-                <h2>Visited Destinations</h2>
-                <ul class="visited-list">
+                <h2>Visited Destinations <span :class="{rotate: openVisitList}" @click="openVisitedList">&#9660;</span></h2>
+                <ul class="visited-list" :class="{open: openVisitList}">
                     <li v-for="(dest, index) in visitedDestinations" :key="dest.location_id" class="saved-list__item">
                         <img :src="dest.photo.images.small.url" class="responsive-img">
                         <div class="item-info">
@@ -60,7 +60,9 @@ export default {
         return {
             destIndex: null,
             showDatePicker: false,
-            showHotelModal: true
+            showHotelModal: true,
+            openSaveList: false,
+            openVisitList: false
         }
     },
     computed: {
@@ -93,6 +95,12 @@ export default {
         },
         closeModal() {
             this.$store.commit('toggleHotelModal');
+        },
+        openSavedList() {
+            this.openSaveList = !this.openSaveList
+        },
+        openVisitedList() {
+            this.openVisitList = !this.openVisitList
         }
     },
     components: {
@@ -103,14 +111,25 @@ export default {
 </script>
 
 <style lang="scss">
+@import '../assets/global.scss';
 
 .my-lists {
     margin-top: 50px;
     position: relative;
 
+    @media handheld, only screen and (max-width: $mobile) {
+        padding-top: 120px;
+        margin-top: 0;
+    }
+
     .container {
         display: flex;
         justify-content: space-around;
+
+        @media handheld, only screen and (max-width: $mobile) {
+            flex-direction: column;
+            width: 100%;
+        }
     }
 }
 
@@ -119,10 +138,32 @@ export default {
     width: 420px;
     text-align: center;
     padding: 15px 0;
+
+    @media handheld, only screen and (max-width: $mobile) {
+        width: auto;
+    }
     
     h2 {
         margin: 0;
         font-family: 'Montserrat', sans-serif;
+
+        @media handheld, only screen and (max-width: $mobile) {
+            font-size: 22px;
+        }
+
+        span {
+            display: none;
+            transition: all 0.2s linear;
+
+            &.rotate {
+                transform: rotate(180deg);
+            }
+
+            @media handheld, only screen and (max-width: $mobile) {
+                color: $primary-colour;
+                display: inline-block;
+            }
+        }
     }
 }
 
@@ -134,6 +175,21 @@ export default {
     justify-content: center;
     margin-top: 15px;
     padding: 15px;
+    transition: all 0.5s linear;
+
+    &.open {
+        @media handheld, only screen and (max-width: $mobile) {
+            height: auto;
+            display: block;
+        }
+    }
+
+    @media handheld, only screen and (max-width: $mobile) {
+        height: 0px;
+        overflow: hidden;
+        display: none;
+        padding: 0px;
+    }
 
         &__item {
         flex: 1 1 calc(100% / 3 - 20px);
@@ -170,16 +226,28 @@ export default {
                 font-family: 'Montserrat', sans-serif;
                 font-size: 20px;
                 margin: 0;
+
+                @media handheld, only screen and (max-width: $mobile) {
+                    font-size: 16px;
+                }
             }
 
             h4 {
                 font-family: 'Montserrat', sans-serif;
                 font-size: 16px;
                 margin: 0 0 5px 0;
+                
+                @media handheld, only screen and (max-width: $mobile) {
+                    font-size: 14px;
+                }
             }
 
             span {
                 font-family: 'Montserrat', sans-serif;
+
+                @media handheld, only screen and (max-width: $mobile) {
+                    font-size: 12px;
+                }
             }
 
             p {

@@ -61,6 +61,10 @@ export default {
         text-align: center;
         position: relative;
 
+        @media handheld, only screen and (max-width: $mobile) {
+            width: 290px;
+        }
+
         .close {
             position: absolute;
             top: -10px;

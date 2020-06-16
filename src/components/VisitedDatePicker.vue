@@ -88,6 +88,10 @@ export default {
         position: relative;
         @include modal;
 
+        @media handheld, only screen and (max-width: $mobile) {
+            width: 290px;
+        }
+
         .close {
             position: absolute;
             top: -10px;

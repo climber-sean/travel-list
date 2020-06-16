@@ -35,6 +35,7 @@ $logofont: 'Pacifico', cursive;
             position: fixed;
             width: 100%;
             background: white;
+            z-index: 10;
         }
     }
 

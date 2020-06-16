@@ -230,6 +230,10 @@
             margin: 0 0 0 10px;
             width: 100%;
 
+            @media handheld, only screen and (max-width: $mobile) {
+                text-align: center;
+            }
+
             .co-ords {
                 margin-bottom: 10px;
             }
@@ -238,6 +242,10 @@
                 font-family: 'Montserrat', sans-serif;
                 font-size: 20px;
                 margin: 0;
+
+                @media handheld, only screen and (max-width: $mobile) {
+                    font-size: 16px;
+                }
             }
 
             p {
