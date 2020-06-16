@@ -60,6 +60,10 @@ export default {
             @include modal;
             position: relative;
 
+            @media handheld, only screen and (max-width: $mobile) {
+                width: 290px;
+            }
+
             p {
                 font-family: 'Montserrat';
                 margin: 30px 0 40px 0;

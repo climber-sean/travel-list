@@ -67,6 +67,10 @@ export default {
             position: relative;
             @include modal;
 
+            @media handheld, only screen and (max-width: $mobile) {
+                width: 90%;
+            }
+
             h2 {
                 font-family: 'Montserrat', sans-serif;
 
