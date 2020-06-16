@@ -113,6 +113,10 @@
 
     .search {
         padding: 40px 0;
+
+        @media handheld, only screen and (max-width: $mobile) {
+            padding: 150px 0 40px 0;
+        }
     }
 
     .search-bar {
@@ -128,6 +132,10 @@
             font-size: 12px;
             font-family: 'Montserrat', sans-serif;
             outline: none;
+
+            @media handheld, only screen and (max-width: $mobile) {
+                width: 60%;
+            }
         }
 
         &__button {
@@ -202,6 +210,10 @@
         display: flex;
         box-shadow: 0 0 10px 4px rgba(0,0,0,0.2);
         transition: all 0.2s ease-in;
+
+        @media handheld, only screen and (max-width: $tablet) {
+            flex: 0 0 calc(100% / 2 - 20px);
+        }
 
         &:hover {
             transform: scale(1.05);

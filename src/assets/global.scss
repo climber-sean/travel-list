@@ -6,6 +6,12 @@ $button-green: #3ea167;
 $button-red: #b02727;
 $button-blue: #3a77ff;
 
+// Device Widths
+
+$laptop: 1440px;
+$tablet: 1024px;
+$mobile: 740px;
+
 // Modal
 
 @mixin modal {
