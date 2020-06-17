@@ -132,6 +132,8 @@
             font-size: 12px;
             font-family: 'Montserrat', sans-serif;
             outline: none;
+            display: inline-block;
+            text-align: left;
 
             @media handheld, only screen and (max-width: $mobile) {
                 width: 60%;
@@ -151,6 +153,7 @@
             cursor: pointer;
             font-size: 12px;
             font-family: 'Montserrat', sans-serif;
+            display: inline-block;
         }
     }
 

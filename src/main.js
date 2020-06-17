@@ -1,6 +1,8 @@
+// The Vue build version to load with the `import` command
+// (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
-import App from './App.vue'
-import VueRouter from 'vue-router';
+import App from './App'
+import router from './router'
 import VCalendar from 'v-calendar';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faCheckCircle } from '@fortawesome/free-solid-svg-icons';
@@ -19,19 +21,16 @@ library.add(faCheckCircle, faTimesCircle, faTimes);
 Vue.component('font-awesome-icon', FontAwesomeIcon);
 
 import { appStore } from './store/store';
-import { routes } from './routes';
 
-Vue.use(VueRouter);
+Vue.use(VCalendar);
 
-const router = new VueRouter({
-  routes
-})
+Vue.config.productionTip = false
 
-Vue.use(VCalendar)
-
+/* eslint-disable no-new */
 new Vue({
   el: '#app',
   store: appStore,
   router,
-  render: h => h(App)
+  components: { App },
+  template: '<App/>'
 })

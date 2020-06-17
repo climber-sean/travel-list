@@ -202,7 +202,6 @@ export default {
         display: flex;
         box-shadow: 0 0 10px 4px rgba(0,0,0,0.2);
         transition: all 0.2s ease-in;
-        height: 100%;
 
         &:hover {
             transform: scale(1.05);

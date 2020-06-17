@@ -69,6 +69,7 @@ export default {
 
             @media handheld, only screen and (max-width: $mobile) {
                 width: 90%;
+                max-height: 480px;
             }
 
             h2 {
@@ -92,6 +93,10 @@ export default {
                 list-style: none;
                 margin: 0 0 20px 0;
                 padding: 0;
+
+                @media handheld, only screen and (max-width: $mobile) {
+                    height: 280px;
+                }
 
                 li {
                     border-bottom: 1px solid rgba(0,0,0,0.1);
